@@ -25,6 +25,12 @@ public class AppInitializer {
         p1.setQtyOnHand(100);
         p1.setPrice(150);
 
+        Item p2=new Item();
+        p2.setItemCode("P001");
+        p2.setDescription("Sunlight");
+        p2.setQtyOnHand(200);
+        p2.setPrice(200);
+
         Session session = FactoryConfiguration.getInstance().getSession();
 
         Transaction transaction = session.beginTransaction();
@@ -43,7 +49,10 @@ public class AppInitializer {
         // session.delete(customer);
 
         // Save Item
-         session.save(p1);
+        // session.save(p1);
+
+        // Update Item
+        session.update(p2);
 
         transaction.commit();
 
