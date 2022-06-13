@@ -7,13 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "Orders")
 public class Order {
     @Id
     private String orderId;
     @CreationTimestamp
     private LocalDate date;
-    private String custId;
 
     @ManyToOne
     private Customer customer;
@@ -21,10 +20,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(String orderId, LocalDate date, String custId, Customer customer) {
+    public Order(String orderId, LocalDate date, Customer customer) {
         this.orderId = orderId;
         this.date = date;
-        this.custId = custId;
         this.customer = customer;
     }
 
@@ -44,14 +42,6 @@ public class Order {
         this.date = date;
     }
 
-    public String getCustId() {
-        return custId;
-    }
-
-    public void setCustId(String custId) {
-        this.custId = custId;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -65,7 +55,6 @@ public class Order {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", date=" + date +
-                ", custId='" + custId + '\'' +
                 ", customer=" + customer +
                 '}';
     }

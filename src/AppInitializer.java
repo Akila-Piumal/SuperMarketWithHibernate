@@ -1,5 +1,6 @@
 import lk.ijse.super_market_hibernate.entity.Customer;
 import lk.ijse.super_market_hibernate.entity.Item;
+import lk.ijse.super_market_hibernate.entity.Order;
 import lk.ijse.super_market_hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -31,6 +32,17 @@ public class AppInitializer {
         p2.setQtyOnHand(200);
         p2.setPrice(200);
 
+        Order O1=new Order();
+        O1.setOrderId("OID-001");
+        O1.setCustomer(c1);
+
+        Order O2=new Order();
+        O2.setOrderId("OID-002");
+        O2.setCustomer(c1);
+
+        c1.getOrderList().add(O1);
+        c1.getOrderList().add(O2);
+
         Session session = FactoryConfiguration.getInstance().getSession();
 
         Transaction transaction = session.beginTransaction();
@@ -60,6 +72,12 @@ public class AppInitializer {
 
         // delete Item
         // session.delete(item);
+
+        // Save Order
+        session.save(c1);
+        session.save(O1);
+        session.save(O2);
+
 
         transaction.commit();
 
