@@ -1,24 +1,30 @@
 package lk.ijse.super_market_hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Item {
+public class Item implements Serializable {
     @Id
     private String itemCode;
     private String description;
     private int qtyOnHand;
     private double price;
 
+    @OneToMany(mappedBy = "item")
+    private List<OrderDetail> orderDetails=new ArrayList<>();
+
     public Item() {
     }
 
-    public Item(String itemCode, String description, int qtyOnHand, double price) {
+    public Item(String itemCode, String description, int qtyOnHand, double price, List<OrderDetail> orderDetails) {
         this.itemCode = itemCode;
         this.description = description;
         this.qtyOnHand = qtyOnHand;
         this.price = price;
+        this.orderDetails = orderDetails;
     }
 
     public String getItemCode() {
@@ -53,6 +59,14 @@ public class Item {
         this.price = price;
     }
 
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -60,6 +74,7 @@ public class Item {
                 ", description='" + description + '\'' +
                 ", qtyOnHand=" + qtyOnHand +
                 ", price=" + price +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

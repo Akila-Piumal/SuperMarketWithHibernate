@@ -1,6 +1,7 @@
 import lk.ijse.super_market_hibernate.entity.Customer;
 import lk.ijse.super_market_hibernate.entity.Item;
 import lk.ijse.super_market_hibernate.entity.Order;
+import lk.ijse.super_market_hibernate.entity.OrderDetail;
 import lk.ijse.super_market_hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -32,6 +33,12 @@ public class AppInitializer {
         p2.setQtyOnHand(200);
         p2.setPrice(200);
 
+        Item p3=new Item();
+        p3.setItemCode("P003");
+        p3.setDescription("Rice");
+        p3.setQtyOnHand(100);
+        p3.setPrice(220);
+
         Order O1 = new Order();
         O1.setOrderId("OID-001");
         O1.setCustomer(c1);
@@ -42,6 +49,27 @@ public class AppInitializer {
 
         c1.getOrderList().add(O1);
         c1.getOrderList().add(O2);
+
+
+        // Add order details
+        OrderDetail orderDetail=new OrderDetail();
+        orderDetail.setOrder(O1);
+        orderDetail.setItem(p2);
+        orderDetail.setQty(10);
+
+        O1.getOrderDetails().add(orderDetail);
+        p2.getOrderDetails().add(orderDetail);
+
+        OrderDetail orderDetail2=new OrderDetail();
+        orderDetail2.setOrder(O1);
+        orderDetail2.setItem(p3);
+        orderDetail2.setQty(20);
+
+
+        O1.getOrderDetails().add(orderDetail2);
+        p3.getOrderDetails().add(orderDetail2);
+
+
 
         Session session = FactoryConfiguration.getInstance().getSession();
 
@@ -79,11 +107,20 @@ public class AppInitializer {
         // session.save(O2);
 
         // Search Order
-        Order order = session.get(Order.class, "OID-001");
-        System.out.println(order);
+        // Order order = session.get(Order.class, "OID-001");
+        // System.out.println(order);
 
         // Delete Order
-        session.delete(order);
+        // session.delete(order);
+
+
+        session.save(p2);
+        session.save(p3);
+        session.save(c1);
+        session.save(orderDetail);
+        session.save(orderDetail2);
+        session.save(O1);
+
 
         transaction.commit();
 

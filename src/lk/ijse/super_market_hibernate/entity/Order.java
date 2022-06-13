@@ -2,13 +2,14 @@ package lk.ijse.super_market_hibernate.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Orders")
-public class Order {
+public class Order implements Serializable {
     @Id
     private String orderId;
     @CreationTimestamp
@@ -17,13 +18,17 @@ public class Order {
     @ManyToOne
     private Customer customer;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails=new ArrayList<>();
+
     public Order() {
     }
 
-    public Order(String orderId, LocalDate date, Customer customer) {
+    public Order(String orderId, LocalDate date, Customer customer, List<OrderDetail> orderDetails) {
         this.orderId = orderId;
         this.date = date;
         this.customer = customer;
+        this.orderDetails = orderDetails;
     }
 
     public String getOrderId() {
@@ -50,12 +55,21 @@ public class Order {
         this.customer = customer;
     }
 
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", date=" + date +
-                ", customer=" + customer.getId() +
+                ", customer=" + customer +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }
