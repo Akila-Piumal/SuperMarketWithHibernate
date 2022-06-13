@@ -55,7 +55,7 @@ public class Order {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", date=" + date +
-                ", customer=" + customer +
+                ", customer=" + customer.getId() +
                 '}';
     }
 }

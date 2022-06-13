@@ -32,11 +32,11 @@ public class AppInitializer {
         p2.setQtyOnHand(200);
         p2.setPrice(200);
 
-        Order O1=new Order();
+        Order O1 = new Order();
         O1.setOrderId("OID-001");
         O1.setCustomer(c1);
 
-        Order O2=new Order();
+        Order O2 = new Order();
         O2.setOrderId("OID-002");
         O2.setCustomer(c1);
 
@@ -74,10 +74,16 @@ public class AppInitializer {
         // session.delete(item);
 
         // Save Order
-        session.save(c1);
-        session.save(O1);
-        session.save(O2);
+        // session.save(c1);
+        // session.save(O1);
+        // session.save(O2);
 
+        // Search Order
+        Order order = session.get(Order.class, "OID-001");
+        System.out.println(order);
+
+        // Delete Order
+        session.delete(order);
 
         transaction.commit();
 
