@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
@@ -14,13 +15,17 @@ public class Order {
     private LocalDate date;
     private String custId;
 
+    @ManyToOne
+    private Customer customer;
+
     public Order() {
     }
 
-    public Order(String orderId, LocalDate date, String custId) {
+    public Order(String orderId, LocalDate date, String custId, Customer customer) {
         this.orderId = orderId;
         this.date = date;
         this.custId = custId;
+        this.customer = customer;
     }
 
     public String getOrderId() {
@@ -47,12 +52,21 @@ public class Order {
         this.custId = custId;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", date=" + date +
                 ", custId='" + custId + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 }
