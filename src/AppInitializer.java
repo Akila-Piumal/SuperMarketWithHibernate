@@ -55,11 +55,11 @@ public class AppInitializer {
         // session.update(p2);
 
         // search Item
-        Item item = session.get(Item.class, "P001");
-        System.out.println(item);
+        // Item item = session.get(Item.class, "P001");
+        // System.out.println(item);
 
         // delete Item
-        session.delete(item);
+        // session.delete(item);
 
         transaction.commit();
 
