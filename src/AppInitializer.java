@@ -16,7 +16,7 @@ public class AppInitializer {
 
         Transaction transaction = session.beginTransaction();
 
-
+        session.save(c1);
 
         transaction.commit();
 
