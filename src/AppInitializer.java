@@ -1,5 +1,20 @@
+import lk.ijse.super_market_hibernate.entity.Customer;
+import lk.ijse.super_market_hibernate.util.FactoryConfiguration;
+import org.hibernate.Session;
+
 public class AppInitializer {
     public static void main(String[] args) {
+        Customer c1=new Customer();
 
+        c1.setId("C001");
+        c1.setName("Akila");
+        c1.setAddress("Mathugama");
+        c1.setSalary(90000);
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+
+
+
+        session.close();
     }
 }
