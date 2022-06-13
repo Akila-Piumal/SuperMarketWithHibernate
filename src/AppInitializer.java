@@ -25,7 +25,7 @@ public class AppInitializer {
         p1.setQtyOnHand(100);
         p1.setPrice(150);
 
-        Item p2=new Item();
+        Item p2 = new Item();
         p2.setItemCode("P001");
         p2.setDescription("Sunlight");
         p2.setQtyOnHand(200);
@@ -52,7 +52,11 @@ public class AppInitializer {
         // session.save(p1);
 
         // Update Item
-        session.update(p2);
+        // session.update(p2);
+
+        // search Item
+        Item item = session.get(Item.class, "P001");
+        System.out.println(item);
 
         transaction.commit();
 
