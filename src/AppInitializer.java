@@ -58,6 +58,9 @@ public class AppInitializer {
         Item item = session.get(Item.class, "P001");
         System.out.println(item);
 
+        // delete Item
+        session.delete(item);
+
         transaction.commit();
 
         session.close();
